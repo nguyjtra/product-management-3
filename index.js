@@ -57,11 +57,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.locals.prefixAdmin = systemConfig.prefixAdmin
 
 // import views engine and pug
-app.set('views','./views');
+app.set('views',`${__dirname}/views`);
 app.set('view engine','pug');
 
 //import static file
-app.use(express.static('public'));
+app.use(express.static(`${__dirname}/public`));
 
 // move into views file first render.....
 

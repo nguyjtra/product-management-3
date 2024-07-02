@@ -67,7 +67,8 @@ const products=await product
 .limit(pagination.limitItems)
 .skip(pagination.skip)
 .sort({
-    title:"asc",
+  
+    position:"asc"
    
 
 });
@@ -164,6 +165,7 @@ module.exports.position=async(req,res)=>{
      });
 
 }
+
 //display
 module.exports.addNew=async(req,res)=>{
     console.log(5);
@@ -209,16 +211,20 @@ res.redirect('/admin/products/')
 }
 
 module.exports.edit= async (req,res)=>{
+    
+    try{
     console.log(7);
     const id=req.params.id
-
     const a= await product.findOne({
         _id:id,
         deleted:false
     });
     res.render('admin/pages/edit/index',{
         product:a
-    })
+    })}
+    catch(error){
+        console.log(error);
+    }
 }
 
 

@@ -123,7 +123,7 @@ let all= document.querySelector("[name='checkAll']")
 
 let checkItem=document.querySelectorAll("[name='checkItem']")
 
-if(all){
+if(all && checkItem){
 all.addEventListener('click',()=>{
 
         checkItem.forEach((value)=>{
@@ -131,7 +131,6 @@ all.addEventListener('click',()=>{
         })
     
 })
-}
 
 checkItem.forEach((button)=>{
     button.addEventListener('click',()=>{
@@ -146,6 +145,7 @@ checkItem.forEach((button)=>{
 
     })
 })
+}
 
 
 
@@ -225,7 +225,9 @@ if(buttonDelete.length>0){
 //position
 
 let posList=document.querySelectorAll("[name='position']")
-posList.forEach((pos)=>{
+
+if(posList.length>0){
+    posList.forEach((pos)=>{
 
     pos.addEventListener('change',()=>{
         let value=pos.getAttribute('value')
@@ -244,7 +246,7 @@ posList.forEach((pos)=>{
 
     })
 })
-
+}
 
 
 
