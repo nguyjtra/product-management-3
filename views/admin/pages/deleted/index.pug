@@ -1,0 +1,57 @@
+extends ../../layout/default.pug
+include ../../mixins/pagination.pug
+block main
+    h1(class="mb-4") Trash Can
+    button.btn.btn-primary(type='button' groupReverse) Group-Reverse
+
+    table.table.table-hover.table-sm
+        thead
+        tr
+            th 
+                input(type="checkbox", name="checkAll")
+            th number
+            th img
+            th topic
+            th price
+            th position
+            th reverse
+        tbody
+        each item,index in product
+            tr 
+            td  
+                input(type="checkbox", name="checkItem", value_reverse=item.id)
+            td #{index+1}
+            td
+                img(
+                src=item.thumbnail
+                alt=item.title
+                width="80px"
+                height="auto" 
+                )
+            td #{item.title}
+            td #{item.price}$
+            td #{item.position}
+            td  
+                button(class="btn btn-warning btn-sm", reverse=item.id ) reverse
+    nav
+    ul(class="pagination")
+      if(pagination.currentPage -1>=1)
+        li(class="page-item")
+          button(class="page-link"
+                button-pagination= pagination.currentPage -1
+          ) prev
+      
+      -for (var i = 1; i <= pagination.totalPage; i++)
+        li(class=("page-item "+(pagination.currentPage == i ? "active": "")))
+          button(
+            class="page-link"
+            button-pagination= i
+          ) #{i}
+
+
+
+      if(pagination.currentPage +1<=pagination.totalPage)
+        li(class="page-item")
+          button(class="page-link"
+                  button-pagination= pagination.currentPage +1
+            ) next

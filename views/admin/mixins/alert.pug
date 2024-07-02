@@ -1,0 +1,12 @@
+
+mixin alert-success(time=500)
+    - if (messages.error)
+        div(
+            class="alert alert-danger show-alert" alert=time
+        ) #{messages.error}
+
+mixin alert-error(time=500)
+    - if (messages.status)
+        div(
+            class="alert alert-primary show-alert" alert=time
+        ) #{messages.status}

@@ -1,0 +1,21 @@
+html
+    head 
+        title  #{pageTitle}
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        //- div header 
+        //- move into partial
+        include ../partial/header.pug
+        
+
+        block main 
+
+        include ../partial/footer.pug
+        //- div footer 
+        //- move into partial
+
+        script(src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js")
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js")
+        script(src="/js/script.js") 
+        
