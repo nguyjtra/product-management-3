@@ -7,6 +7,15 @@ const trashRoute=require('./trash.route')
 //import config system.js
 const systemConfig = require("../../config/system");
 
+const category=require('./category.route')
+
+const role=require('./role.route')
+
+const permissions=require('./permission.route')
+
+const auth=require('./auth.route')
+
+const account=require('./account.route')
 module.exports.index=(app)=>{
 
     const path = `/${systemConfig.prefixAdmin}`;
@@ -34,4 +43,20 @@ module.exports.index=(app)=>{
 
     
     app.use(`${path}/deleted`, trashRoute)
+
+
+    app.use(`${path}/products-category`,category)
+
+
+    app.use(`${path}/role`,role)
+
+
+    app.use(`${path}/permission`,permissions)
+
+
+    app.use(`${path}/account`,account)
+
+    app.use(`${path}/auth`,auth)
+
+    
 }

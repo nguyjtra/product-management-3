@@ -1,0 +1,33 @@
+extends ../../../layout/default.pug
+
+block main
+  h1(class="mb-4") Edit Role
+
+  form(
+    action=`/${prefixAdmin}/role/edit/${product.id}?_method=PATCH`
+    method="POST"
+  )
+    div(class="form-group")
+      label(for="title") Topic
+      input(
+        type="text"
+        class="form-control"
+        id="title"
+        name="title"
+        value=product.title
+        required
+      )
+    div(class="form-group")
+      label(for="desc") Discription
+      input(
+        type="text"
+        class="form-control"
+        id="desc"
+        name="description"
+        value=product.description
+      )
+    div(class="form-group")
+      button(
+        type="submit"
+        class="btn btn-primary"
+      ) Submit

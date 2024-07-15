@@ -111,6 +111,11 @@ block main
               class="btn btn-warning btn-sm"
             ) edit
             button(class="btn btn-danger btn-sm ml-1" button-delete=item.id) delete
+            
+            a(
+                  class="btn btn-info btn-sm"
+                  href=`/${prefixAdmin}/products/detail/${item.id}`
+                ) detail
   +pagination(pagination)
   //- nav
   //-   ul(class="pagination")

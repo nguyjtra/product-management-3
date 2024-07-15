@@ -1,0 +1,93 @@
+extends ../../../layout/default.pug
+include ../../../mixins/select-tree.pug
+block main
+  h1(class="mb-4") #{pageTitle}
+
+  form(
+    action=`/${prefixAdmin}/products-category/addNew`
+    method="POST"
+    enctype="multipart/form-data"
+  )
+    div(class="form-group")
+      label(for="title") Topic
+      input(
+        type="text"
+        class="form-control"
+        id="title"
+        name="title"
+        required
+      )
+    div(class="form-group")
+      label(for="parent_id") Parent ID
+      select(
+        name="parent_id"
+        class="form-control"
+        id="parent_id"
+      )
+        option(value="") -- Parent ID --
+        +select-tree(categories)
+        //- if(categories)
+        //-   each item in categories
+        //-     option(value=item.id) #{item.title}
+
+    div(class="form-group")
+      label(for="desc") Descrpition
+      textarea(
+        type="text"
+        class="form-control"
+        id="desc"
+        name="description"
+        rows="5"
+        textarea-mce
+      )
+    div(
+      class="form-group"
+      upload-image
+    )
+      label(for="thumbnail") Img
+      input(
+        type="file"
+        class="form-control-file"
+        id="thumbnail"
+        name="thumbnail"
+        accept="image/*"
+        upload-image-input
+      )
+      img(
+        src=""
+        class="image-preview"
+        upload-image-preview
+      )
+    div(class="form-group")
+      label(for="position") Position
+      input(
+        type="number"
+        class="form-control"
+        id="position"
+        name="CategoryPosition"
+        min="1"
+      )
+    div(class="form-group form-check form-check-inline")
+      input(
+        type="radio"
+        class="form-check-input"
+        id="statusActive"
+        name="status"
+        value="active"
+        checked
+      )
+      label(for="statusActive" class="form-check-label") Active
+    div(class="form-group form-check form-check-inline")
+      input(
+        type="radio"
+        class="form-check-input"
+        id="statusInActive"
+        name="status"
+        value="inactive"
+      )
+      label(for="statusInActive" class="form-check-label") Inactive
+    div(class="form-group")
+      button(
+        type="submit"
+        class="btn btn-primary"
+      ) submit

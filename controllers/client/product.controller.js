@@ -1,4 +1,5 @@
-const product = require("../../model/product.model")
+const product = require("../../model/product.model");
+
 //import model (product.model.js) database
 
 module.exports.index=async(req,res)=>{
@@ -21,5 +22,17 @@ module.exports.index=async(req,res)=>{
         product:products
     });
         
+
+}
+
+module.exports.detail = async(req,res)=>{
+    let slug=req.params.slug;
+
+    let products= await product.findOne({
+        slug:slug
+    })
+    res.render('client/pages/detail/index',{
+        product:products
+    });
 
 }

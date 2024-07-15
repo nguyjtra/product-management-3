@@ -12,6 +12,7 @@ var bodyParser = require('body-parser')
 //import system.js
 const systemConfig = require("./config/system");
 
+var path = require('path');
 
 var cookieParser = require('cookie-parser')
 var session = require('express-session')
@@ -27,7 +28,10 @@ app.use(cookieParser('keyboard cat'));
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
 
+// bo soan thao word
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
+//_dirname is name base folder
 
 require('dotenv').config();
 //USING EVN
@@ -51,6 +55,7 @@ database.connect();
 //move model into MODEL (product.model.js)
 
 app.use(bodyParser.json())
+
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // app local variable using for .pug only

@@ -10,7 +10,9 @@ module.exports.index=async(req,res)=>{
     const find={
         deleted:false,
     };
-
+    let sort={
+        position:"asc"
+    }
     const filterStatus=[
         {
             label:'ALL',
@@ -66,12 +68,7 @@ const products=await product
 .find(find)
 .limit(pagination.limitItems)
 .skip(pagination.skip)
-.sort({
-  
-    position:"asc"
-   
-
-});
+.sort(sort);
 
     res.render('admin/pages/product/index',{
         product:products,
@@ -151,6 +148,7 @@ module.exports.deleteItem=async(req,res)=>{
 
 
 module.exports.position=async(req,res)=>{
+    try{
     console.log(4);
     console.log(req.params)
     let {value,id}=req.params;
@@ -162,7 +160,10 @@ module.exports.position=async(req,res)=>{
      })
     res.json({
         code:200
-     });
+     });}
+    catch(error){
+        res.redirect('/admin/products/')
+    }
 
 }
 
@@ -171,6 +172,8 @@ module.exports.addNew=async(req,res)=>{
     console.log(5);
     res.render('admin/pages/creat/index')
 }
+
+
 
 //process add new and using file upload
 module.exports.creat=async(req,res)=>{
@@ -182,12 +185,6 @@ module.exports.creat=async(req,res)=>{
     //     return;
     // }
 
-
-    console.log(req.file);
-
-    if(req.file){
-        req.body.thumbnail=`/uploads/${req.file.filename}`
-    }
 
 req.body.price=parseInt(req.body.price)
 
@@ -204,7 +201,7 @@ else  {req.body.position=  (await product.countDocuments({}))+1;}
 let newPorduct= new product(req.body);
 
 await newPorduct.save()
-
+console.log(req.body)
 res.redirect('/admin/products/')
 
 
@@ -231,9 +228,9 @@ module.exports.edit= async (req,res)=>{
 module.exports.editPatch=async (req,res)=>{
     console.log(8);
     const id=req.params.id;
-    if(req.file){
-        req.body.thumbnail=`/uploads/${req.file.filename}`
-    }
+    // if(req.file){
+    //     req.body.thumbnail=`/uploads/${req.file.filename}`
+    // }
 
     req.body.price=parseInt(req.body.price)
 
@@ -244,7 +241,7 @@ module.exports.editPatch=async (req,res)=>{
     if(req.body.position){
         req.body.position=parseInt(req.body.position);
     }
-    else  req.body.position=  (await product.countDocuments({}))+1;
+    else  {req.body.position=  (await product.countDocuments({}))+1;}
 
 
     await product.updateOne({
@@ -254,4 +251,16 @@ module.exports.editPatch=async (req,res)=>{
     )
     res.redirect('/admin/products/')
 
+}
+
+
+module.exports.detail=async(req,res)=>{
+    let id=req.params.id;
+    let products=await product.findOne({
+            _id:id,
+            deleted:false
+    })
+    res.render('admin/pages/detail/index',{
+        product:products
+    })
 }

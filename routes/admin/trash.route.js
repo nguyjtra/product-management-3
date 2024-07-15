@@ -11,4 +11,7 @@ router.patch('/reverse/:id',trashController.reverse)
 
 
 router.patch('/reverseMany',trashController.reverseMany)
+
+
+router.patch('/deleteForever/:id',trashController.delete)
 module.exports=router

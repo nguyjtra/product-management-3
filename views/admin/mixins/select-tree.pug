@@ -1,0 +1,7 @@
+mixin select-tree(categories, level=1, id="")
+    if(categories)
+          each item in categories
+            - const a= Array(level).join("----")
+            option(value=item.id selected=(item.id == id ? true : false))  #{a} #{item.title} 
+            if(item.children)
+                +select-tree(item.children, level+1,id)

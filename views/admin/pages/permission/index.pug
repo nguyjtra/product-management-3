@@ -1,0 +1,67 @@
+extends ../../layout/default.pug
+
+block main
+  h1(class="mb-4") Permission
+
+  if(records)
+    div(class="text-right")
+      button(
+        type="submit"
+        class="btn btn-primary mb-3"
+        button-submit=`/${prefixAdmin}/permission/Update`
+      ) Update
+
+    table(
+      class="table table-hover table-sm"
+      table-permissions
+    )
+      thead
+        tr
+          th Name
+          each item in records
+            th(
+              class="text-center"
+              role-id=item.id
+            ) #{item.title}
+      tbody
+        tr
+          td Detail
+          each item in records
+            td(class="text-center")
+              input(
+                type="checkbox" 
+                data-id=item.id 
+                data-name="products-category_view"
+                checked=(item.permission.includes("products-category_view") ? true : false)
+              )
+        tr
+          td Add New
+          each item in records
+            td(class="text-center")
+              input(
+                type="checkbox" 
+                data-id=item.id
+                data-name="products-category_create"                
+                checked=(item.permission.includes("products-category_create") ? true : false)
+              )
+        tr
+          td Edit
+          each item in records
+            td(class="text-center")
+              input(
+                type="checkbox" 
+                data-id=item.id
+                data-name="products-category_edit"
+                checked=(item.permission.includes("products-category_edit") ? true : false)
+              )
+        tr
+          td Delete
+          each item in records
+            td(class="text-center")
+              input(
+                type="checkbox" 
+                data-id=item.id
+                data-name="products-category_delete"
+                checked=(item.permission.includes("products-category_delete") ? true : false)
+              )
+    

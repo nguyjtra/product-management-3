@@ -1,7 +1,5 @@
 const express= require('express');
 const router=express.Router();
-
-
 //upload picture
 const multer  = require('multer')
 
@@ -20,8 +18,8 @@ const multer  = require('multer')
 
 
 const storage=require('../../helpers/storage.helper')
-
-const upload = multer({ storage: storage.storage})
+const img=require('../../middlewares/admin/uploadCloud')
+const upload = multer()
 
 const productController=require('../../controllers/admin/product.controller')
 // router.get('/',(rep,res)=>{
@@ -40,7 +38,7 @@ router.get('/',productController.index)
 router.patch('/changeStatus/:status/:id',productController.changeStatus)
 
 
-router.post('/addNew', upload.single('thumbnail'),validate.creat ,productController.creat)
+router.post('/addNew', upload.single('thumbnail'),img.cloud, validate.creat, productController.creat)
 
 // router.patch('/edit/:id', upload.single('thumbnail'),validate.creat ,productController.editPatch)
 
@@ -56,13 +54,12 @@ router.patch('/position/:value/:id',productController.position)
 router.get('/create',productController.addNew)
 
 
-// router.post('/addNew', upload.single('thumbnail'),validate.creat ,productController.creat)
-
 
 router.get('/Preview/:id',productController.edit)
 
 
-router.patch('/edit/:id', upload.single('thumbnail'),validate.creat ,productController.editPatch)
+router.patch('/edit/:id', upload.single('thumbnail'),img.cloud,validate.creat ,productController.editPatch)
 
+router.get('/detail/:id', productController.detail)
 
 module.exports=router;

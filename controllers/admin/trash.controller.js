@@ -55,3 +55,15 @@ module.exports.reverseMany=async(req,res)=>{
         code:200
      });
 }
+
+module.exports.delete=async(req,res)=>{
+    await product.deleteOne({
+        _id: req.params.id
+    })
+
+    req.flash('status', 'success');
+
+    res.json({
+        code:200
+     });
+}

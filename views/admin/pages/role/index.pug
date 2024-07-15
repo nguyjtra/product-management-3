@@ -1,0 +1,50 @@
+extends ../../layout/default.pug
+
+block main
+
+    h1(class="mb-4") Role
+
+    .card.mb-3
+    .card-header 
+    .card-body
+      .row
+        .col-8
+        .col-4.text-right
+          a(
+            href=`/${prefixAdmin}/role/displayAdd`
+            class="btn btn-outline-success"
+          ) + Add New
+
+      table(
+        class="table table-hover table-sm"
+      )
+        thead
+          tr
+            th number
+            th role
+            th discription
+            th action
+
+        tbody
+          if(records.length > 0)
+            each item, index in records
+              tr
+                td #{index + 1}
+                td #{item.title}
+                td #{item.description}
+                td
+                  a(
+                    class="btn btn-secondary btn-sm"
+                    href=`/${prefixAdmin}/role/detail/${item.id}`
+                  ) detail
+                  a(
+                    class="btn btn-warning btn-sm ml-1"
+                    href=`/${prefixAdmin}/role/displayEdit/${item.id}`
+                  ) edit
+                  a(
+                    href=`/${prefixAdmin}/role/delete/${item.id}`
+                    class="btn btn-danger btn-sm ml-1"
+                  ) delete
+          else
+            tr
+              td(colspan="4" class="text-center") EMPTY
