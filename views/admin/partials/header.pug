@@ -6,3 +6,12 @@ header.header
           a(href="/admin/dashboard") ADMIN
 
       .col-9
+        div(class="col-9 text-right")
+          a(
+              href=`/${prefixAdmin}/profile`
+              class="btn btn-info btn-sm"
+            ) #{user.fullName}
+          a(
+            href=`/${prefixAdmin}/logout`
+            class="btn btn-danger btn-sm ml-2"
+          ) Log out

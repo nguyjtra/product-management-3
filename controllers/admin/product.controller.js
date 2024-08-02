@@ -2,17 +2,25 @@
 const product = require("../../model/product.model")
 //import model (product.model.js) database
 const paginationHelper=require('../../helpers/pagination.helper');
-
-
-
+const Account = require("../../model/account.model");
+const ProductCategory=require('../../model/category.model')
+var moment = require('moment'); 
 
 module.exports.index=async(req,res)=>{
     const find={
         deleted:false,
     };
     let sort={
-        position:"asc"
     }
+
+
+    if(req.query.sortValue && req.query.sortKey){
+        sort[req.query.sortKey]= req.query.sortValue
+    }
+    else{
+        sort.position="asc"
+    }
+
     const filterStatus=[
         {
             label:'ALL',
@@ -70,6 +78,33 @@ const products=await product
 .skip(pagination.skip)
 .sort(sort);
 
+
+for(const item of products){
+    if(item.createdBy){
+    const account=await Account.findOne({
+        _id:item.createdBy
+    })
+    
+    item.createdByFullName=account.fullName
+}
+    else {
+        item.createdByFullName="";
+    }
+    item.createdAtNewTime=moment(item.createdAt).format("MMM Do YY");
+    
+    if(item.UpdatedBy){
+        const account= await Account.findOne({
+            _id:item.UpdatedBy
+        })
+        item.updatedByFullName=account.fullName
+    }
+    else {
+        item.updatedByFullName='';
+    }
+    item.updatedAtNewTime=moment(item.updatedAt).format("MMM Do YY");
+
+}
+
     res.render('admin/pages/product/index',{
         product:products,
         keyword:keyword,
@@ -78,7 +113,6 @@ const products=await product
     })
     
 }
-
 
 
 
@@ -170,7 +204,14 @@ module.exports.position=async(req,res)=>{
 //display
 module.exports.addNew=async(req,res)=>{
     console.log(5);
-    res.render('admin/pages/creat/index')
+    const newCategories = await ProductCategory.find({
+        deleted: false
+      });
+
+
+    res.render('admin/pages/creat/index',{
+        categories: newCategories
+    })
 }
 
 
@@ -197,6 +238,7 @@ if(req.body.position){
 }
 else  {req.body.position=  (await product.countDocuments({}))+1;}
 
+req.body.createdBy= res.locals.user.id
 
 let newPorduct= new product(req.body);
 
@@ -216,8 +258,13 @@ module.exports.edit= async (req,res)=>{
         _id:id,
         deleted:false
     });
+    const newCategories = await ProductCategory.find({
+        deleted: false
+      });
+
     res.render('admin/pages/edit/index',{
-        product:a
+        product:a,
+        categories: newCategories
     })}
     catch(error){
         console.log(error);
@@ -243,7 +290,7 @@ module.exports.editPatch=async (req,res)=>{
     }
     else  {req.body.position=  (await product.countDocuments({}))+1;}
 
-
+    req.body.UpdatedBy = res.locals.user.id
     await product.updateOne({
         _id:id
     },

@@ -1,5 +1,5 @@
 extends ../../layout/default.pug
-
+include ../../mixins/select-tree.pug
 block main
     
 
@@ -20,6 +20,25 @@ block main
             name="title"
             required
         )
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="featured1"
+                name="featured"
+                value="1"
+            )
+            label(for="featured1" class="form-check-label") HighLight
+        div(class="form-group form-check form-check-inline")
+            input(
+            type="radio"
+            class="form-check-input"
+            id="featured0"
+            name="featured"
+            value="0"
+            checked
+            )
+            label(for="featured0" class="form-check-label") Regular
         div(class="form-group")
         label(for="desc") Describe
         textarea(
@@ -29,6 +48,16 @@ block main
             rows="5"
             textarea-mce
         )
+        div(class="form-group")
+        label(for="product_category_id") Category
+            select(
+            name="product_category_id"
+            class="form-control"
+            id="product_category_id"
+            )
+                option(value="") -- Choose category --
+                if(categories)
+                    +select-tree(categories)
         div(class="form-group")
         label(for="price") Price
         input(

@@ -1,0 +1,64 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+        +box-head(pageTitle)
+
+    .row
+      .col-12
+        div(class="alert alert-success")
+          | Success !!!
+
+    if(order)
+      .row
+        .col-12
+          h4(class="mb-2") Information
+          table(class="table table-bordered")
+            tbody
+              tr
+                td Name
+                td
+                  b #{order.userInfo.fullName}
+              tr
+                td Phone Number
+                td
+                  b #{order.userInfo.phone}
+              tr
+                td Adress
+                td
+                  b #{order.userInfo.address}
+
+      .row
+        .col-12
+          h4(class="mb-2") Products Information
+          table(class="table table-bordered")
+            thead
+              tr
+                th Number
+                th Img
+                th Name
+                th Price
+                th Quantity
+                th Total
+            tbody
+              if(order.products.length > 0)
+                each item, index in order.products
+                  tr
+                    td #{index + 1}
+                    td
+                      img(
+                        src=item.thumbnail
+                        alt=item.title
+                        width="80px"
+                      )
+                    td #{item.title}
+                    td #{item.priceNew}$
+                    td #{item.quantity}
+                    td #{item.totalPrice}$
+
+
+          if(order.products.length > 0)
+            h3(class="text-right") Total: #{totalPrice}$

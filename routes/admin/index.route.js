@@ -15,7 +15,15 @@ const permissions=require('./permission.route')
 
 const auth=require('./auth.route')
 
+const logout=require('./logout.route')
+
 const account=require('./account.route')
+
+const profile=require('./profile.route')
+
+const setting=require('./setting.route')
+
+const check=require(`../../middlewares/admin/auth.middlewares`)
 module.exports.index=(app)=>{
 
     const path = `/${systemConfig.prefixAdmin}`;
@@ -27,7 +35,7 @@ module.exports.index=(app)=>{
     
     // app.use('/admin/dashboard',(adminRoute));
 
-    app.use(`${path}/dashboard`, adminRoute);
+    app.use(`${path}/dashboard`,check, adminRoute);
 
 
     // app.get('/products',(req,res)=>{
@@ -38,25 +46,30 @@ module.exports.index=(app)=>{
 
     // app.use('/admin/products' ,productRoute);
 
-    app.use(`${path}/products`, productRoute);
+    app.use(`${path}/products`,check, productRoute);
 
 
     
-    app.use(`${path}/deleted`, trashRoute)
+    app.use(`${path}/deleted`,check, trashRoute)
 
 
-    app.use(`${path}/products-category`,category)
+    app.use(`${path}/products-category`,check,category)
 
 
-    app.use(`${path}/role`,role)
+    app.use(`${path}/role`,check,role)
 
 
-    app.use(`${path}/permission`,permissions)
+    app.use(`${path}/permission`,check,permissions)
 
 
-    app.use(`${path}/account`,account)
+    app.use(`${path}/account`,check,account)
 
     app.use(`${path}/auth`,auth)
 
-    
+    app.use(`${path}/logout`,logout)
+
+    app.use(`${path}/profile`,check, profile)
+
+
+    app.use(`${path}/settings`,check,setting)
 }

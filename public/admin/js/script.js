@@ -426,6 +426,36 @@ if(tablePermissions) {
   });
 }
 
+let sortSelect=document.querySelector('[sort-select]')
+if(sortSelect){
+    let url = new URL(window.location.href);
+    sortSelect.addEventListener('change',()=>{
+        let[sortKey,sortValue]=sortSelect.value.split('-');
+        if(sortKey && sortValue){
+        url.searchParams.set("sortKey",sortKey)
+        url.searchParams.set('sortValue',sortValue)
+        window.location.href=url.href
+        }
+    })
+}
+
+if(sortSelect){
+    let url= new URL(window.location.href);
+    let a=url.searchParams.get('sortKey')
+    let b=url.searchParams.get('sortValue')
+    let ans=sortSelect.querySelector(`[value="${a}-${b}"]`)
+    ans.setAttribute('selected',true)
+}
+
+let sortClear=document.querySelector('[sort-clear]')
+if(sortClear){
+    let url=new URL(window.location.href)
+    sortClear.addEventListener('click',()=>{
+        url.searchParams.delete("sortKey")
+        url.searchParams.delete('sortValue');
+        window.location.href=url
+    })
+}
 
 
 

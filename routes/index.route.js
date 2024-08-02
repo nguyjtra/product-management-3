@@ -2,9 +2,24 @@
 const homeRouter= require('./home.route');
 //import form product.route.js
 const productRouter= require('./product.route');
-
+const category= require('../middlewares/client/category')
+const SearchRouter=require('./search.route')
+const cart=require('../middlewares/client/cart')
+const cartRouter=require('./cart.route')
+const outRouter=require('./outRouter')
+const userRouter=require('./user.route')
+const user=require('../middlewares/client/user')
+const setting=require('../middlewares/client/setting')
 module.exports.index=(app)=>{
 
+    app.use(cart)
+
+
+    app.use(category)
+
+    app.use(setting)
+
+    app.use(user.info)
     // app.get('/',(rep,res)=>{
     //     res.render('client/pages/home/index')
     // })
@@ -19,5 +34,14 @@ module.exports.index=(app)=>{
 
     app.use('/products',productRouter);
     
+    app.use('/search',SearchRouter)
+
+    app.use('/cart',cartRouter)
+
+    app.use('/checkout', outRouter)
+
+    app.use('/user',userRouter)
+
+
     
 }

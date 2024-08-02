@@ -12,7 +12,7 @@ block main
      .container.my-3
         .row
           .col-12
-               +box-head("product list")
+               +box-head(pageTitle)
                     //- .box-head 
                     //-     h2.inner-title product list
 
@@ -21,7 +21,7 @@ block main
           each item in product 
                .col-4.mb-3
                     .product-item
-                         a(href=`/products/${item.slug}`) 
+                         a(href=`/products/detail/${item.slug}`) 
                               .inner-image
                                    img(src=item.thumbnail, alt=item.title)
                               .inner-content

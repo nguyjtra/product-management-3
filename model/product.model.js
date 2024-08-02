@@ -22,12 +22,16 @@ Schema = mongoose.Schema;
 let productSchema= new mongoose.Schema({
     title: String,
     description: String,
+    product_category_id: String,
     price: Number,
     discountPercentage: Number,
     stock: Number,
     thumbnail: String,
     status: String,
+    featured: String,
     position: Number,
+    createdBy: String,
+    UpdatedBy: String,
     deleted:{
         type: Boolean,
         default:false

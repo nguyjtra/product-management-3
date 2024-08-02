@@ -1,0 +1,27 @@
+extends ../../../layouts/default.pug
+include ../../../mixins/box-head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-8.mx-auto
+        +box-head('Forgot password')
+
+        form(
+          action="/user/password/forgot"
+          method="POST"
+        )
+          div(class="form-group")
+            label(for="email") Email
+            input(
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              required
+            )
+          div(class="form-group")
+            button(
+              type="submit"
+              class="btn btn-primary btn-block"
+            ) Send OTP

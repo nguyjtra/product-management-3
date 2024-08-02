@@ -2,16 +2,23 @@
   .inner-menu
     ul 
       li
-         a(href=`/${prefixAdmin}/dashboard`) dashboard
-      li
-         a(href=`/${prefixAdmin}/products`) product
+         a(href=`/${prefixAdmin}/dashboard`) dashboard    
+      if(role.permission.includes('products_view'))
+        li
+          a(href=`/${prefixAdmin}/products`) product
       li 
         a(href=`/${prefixAdmin}/deleted`) deleted
-      li 
-        a(href=`/${prefixAdmin}/products-category`) category
-      li  
-         a(href=`/${prefixAdmin}/role`) role
-      li 
-          a(href=`/${prefixAdmin}/permission`) permission
-      li 
-          a(href=`/${prefixAdmin}/account`) account
+      if(role.permission.includes('products-category_view'))    
+        li 
+          a(href=`/${prefixAdmin}/products-category`) category  
+      if(role.permission.includes('roles_view'))   
+        li  
+          a(href=`/${prefixAdmin}/role`) role
+      if(role.permission.includes('roles_permissions'))    
+        li 
+            a(href=`/${prefixAdmin}/permission`) permission
+      if(role.permission.includes("accounts_view"))    
+        li 
+            a(href=`/${prefixAdmin}/account`) account
+      li
+        a(href=`/${prefixAdmin}/settings/general`) Setting      
