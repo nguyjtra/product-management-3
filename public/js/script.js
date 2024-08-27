@@ -1,7 +1,8 @@
 
 
+var socket=io();
+
 let alert=document.querySelector('[alert]')
-console.log(alert);
 if(alert){
 let timer=alert.getAttribute('alert') ||500
 
@@ -36,3 +37,5 @@ if(changee.length>=0){
         })
     })
 }
+
+

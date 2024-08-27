@@ -10,6 +10,9 @@ const outRouter=require('./outRouter')
 const userRouter=require('./user.route')
 const user=require('../middlewares/client/user')
 const setting=require('../middlewares/client/setting')
+const chatRouter=require('./chat.route')
+const userMiddleware=require('../middlewares/client/user')
+const usersRouter=require('./users.route')
 module.exports.index=(app)=>{
 
     app.use(cart)
@@ -41,6 +44,11 @@ module.exports.index=(app)=>{
     app.use('/checkout', outRouter)
 
     app.use('/user',userRouter)
+
+    app.use('/users',userMiddleware.requireAuth,usersRouter)
+
+
+    app.use('/chat',userMiddleware.requireAuth,chatRouter)
 
 
     

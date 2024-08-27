@@ -1,0 +1,40 @@
+extends ../../../layouts/default.pug
+include ../../../mixins/box-head.pug
+
+block main
+  .container.my-3
+    include ../../../partial/list-btn-button.pug
+    .row
+      .col-12
+        +box-head("friend request")
+
+    .row(data-users-accept=Client.id)
+      each user in users
+        .col-6(user-id=user.id)
+          div(class="box-user")
+            div(class="inner-avatar")
+              img(
+                src="https://robohash.org/hicveldicta.png"
+                alt=user.fullName
+              )
+            div(class="inner-info")
+              div(class="inner-name") #{user.fullName}
+              div(class="inner-buttons")
+                button(
+                  class="btn btn-sm btn-primary mr-1"
+                  btn-accept-friend=user.id
+                ) Accept
+                button(
+                  class="btn btn-sm btn-secondary mr-1"
+                  btn-refuse-friend=user.id
+                ) Refuse
+                button(
+                  class="btn btn-sm btn-secondary mr-1"
+                  btn-deleted-friend
+                  disabled
+                ) removed
+                button(
+                  class="btn btn-sm btn-primary mr-1"
+                  btn-accepted-friend
+                  disabled
+                ) accepted

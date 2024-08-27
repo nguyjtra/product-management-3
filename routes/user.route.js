@@ -1,6 +1,6 @@
 const express= require('express');
 const router=express.Router();
-
+const userMiddleware=require('../middlewares/client/user')
 
 controller=require('../controllers/client/user.controller')
 router.get('/register',controller.register)
@@ -28,6 +28,6 @@ router.get('/password/reset', controller.reset)
 router.post('/password/reset',controller.resetP)
 
 
-router.get('/profile',controller.profile)
+router.get('/profile',userMiddleware.requireAuth,controller.profile)
 
 module.exports=router

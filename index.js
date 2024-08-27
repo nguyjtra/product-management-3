@@ -3,9 +3,7 @@
 const routeClient =require('./routes/index.route.js')
 //import  admin route file
 const routeAdmin=require('./routes/admin/index.route.js')
-
 var flash = require('express-flash')
-
 var bodyParser = require('body-parser')
 
 
@@ -20,6 +18,22 @@ const express= require('express');
 var methodOverride = require('method-override')
 const app=express();
 
+
+//socket io
+const http = require('http');
+const { Server } = require("socket.io");
+const server = http.createServer(app);
+const io = new Server(server);
+
+// io.on("connection", (socket) => {
+//     console.log("Có 1 người dùng kết nối", socket.id);
+//   });
+//logic cho chat box
+
+global._io=io
+// can using at file controller 
+
+  
 app.use(methodOverride('_method'))
 
 
@@ -91,9 +105,13 @@ routeAdmin.index(app);
 // router+controller
 // controller =module + views
 
+app.get('*',(req,res)=>{
+    res.render('client/pages/error/404',{
+        pageTitle:'404 not found '
+    })
+})
 
-
-app.listen(port,()=>{
+server.listen(port,()=>{
     console.log("running")
 })
 

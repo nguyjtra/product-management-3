@@ -2,4 +2,57 @@
 extend ../../layout/default.pug
 
 block main 
-    h1 dashboard
+ .row.mt-4
+    .col-12
+      .card.mb-4
+        .card-header User Information
+        .card-body
+          if(user.avatar)
+            img(
+              src=user.avatar
+              style="height: 100px;margin-bottom: 15px;"
+            )
+          if(user.fullName)
+            p Full Name: <b>#{user.fullName}</b>
+          if(user.email)
+            p Email: <b>#{user.email}</b>
+          if(user.phone)
+            p Phone: <b>#{user.phone}</b>
+          if(role.title)
+            p Role: <b>#{role.title}</b>
+
+
+    .col-6
+      .card.mb-4
+        .card-header Product List
+        .card-body
+          p Count: <b>5</b>
+          p Active :<b>3</b>
+          p InActive:<b>2</b>
+
+
+    .col-6
+      .card.mb-4
+        .card-header Product
+        .card-body
+          p Count: <b>#{statistic.product.total}</b>
+          p Active :<b>#{statistic.product.active}</b>
+          p InActive :<b>#{statistic.product.inactive}</b>
+
+
+    .col-6
+      .card.mb-4
+        .card-header admin user
+        .card-body
+          p Count: <b>5</b>
+          p Active :<b>3</b>
+          p  InActive: <b>2</b>
+
+
+    .col-6
+      .card.mb-4
+        .card-header Client user
+        .card-body
+          p Count: <b>5</b>
+          p Active: <b>3</b>
+          p InActive: <b>2</b>

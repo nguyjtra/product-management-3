@@ -1,0 +1,64 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+        +box-head("Chat")
+    .row 
+      include ../../partial/list-btn-button.pug
+    .row
+      .col-12
+        .chat(my-id=Client.id)
+          .inner-body
+            each chat in chats
+              div(
+                class=(chat.userId == Client.id ? "inner-outgoing" : "inner-incoming")
+              )
+                if(chat.userId != Client.id)
+                  .inner-name #{chat.fullName}
+                if(chat.content)  
+                  .inner-content
+                    | #{chat.content}
+                if(chat.img)
+                  .inner-images
+                    each img in chat.img 
+                      img(scr=img)    
+            div(class="inner-list-typing") 
+              //- div(class="box-typing")
+              //-   div(class="inner-name") Le Van A
+              //-   div(class="inner-dots")
+              //-     span
+              //-     span
+              //-     span
+              //- div(class="box-typing")
+              //-   div(class="inner-name") Le Van B
+              //-   div(class="inner-dots")
+              //-     span
+              //-     span
+              //-     span
+          .inner-preview-images
+            div(class="custom-file-container" data-upload-id="my-unique-id")      
+          .inner-foot
+            form(
+              class="inner-form"
+              action=""
+            )
+              input(
+                type="text"
+                placeholder="..."
+                name="content"
+              )
+              span(
+                button-icon
+                class="btn btn-sm btn-light mx-1"
+              ) <i class="fa-regular fa-face-smile"></i>
+              label(
+                for="file-upload-with-preview-my-unique-id"
+                class="btn btn-sm btn-light mr-1 mb-0"
+              ) <i class="fa-regular fa-image"></i>
+              button
+                i.fa-solid.fa-paper-plane
+  div(class="tooltip" role="tooltip")
+    emoji-picker(class="light")

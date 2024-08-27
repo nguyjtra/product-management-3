@@ -1,0 +1,25 @@
+.row
+  .col-12
+    a(
+      class="btn btn-primary m-1"
+      href="/users/not-friend"
+    ) people you may know
+    a(
+      class="btn btn-primary m-1"
+      href="/users/friends"
+    ) your friends
+    a(
+      class="btn btn-primary m-1"
+      href="/users/request"
+    ) send friends request
+    a(
+      class="btn btn-primary m-1"
+      href="/users/accept"
+    )   
+        friend  friend request
+        span(
+          class='badge badge-light ml-1'
+          badge-users-accept=Client.id
+        ) #{Client.acceptFriends.length}
+
+      

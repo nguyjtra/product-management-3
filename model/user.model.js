@@ -8,6 +8,9 @@ const accountSchema = new mongoose.Schema({
   token: String,
   avatar: String,
   role_id: String,
+  acceptFriends: Array,
+  requestFriends: Array,
+  friendList: Array,
   status: {
     type:String,
     default:'active'
