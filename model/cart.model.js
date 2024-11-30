@@ -8,8 +8,6 @@ const accountSchema = new mongoose.Schema({
 
         }
     ]
-  
-  
 }, {
   timestamps: true
 });

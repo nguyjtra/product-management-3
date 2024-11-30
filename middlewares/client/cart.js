@@ -20,7 +20,8 @@ module.exports=async(req,res,next)=>{
         const CCart=await cart.findOne({
             _id:req.cookies.cartID
         });
-        res.locals.cartTotal= CCart.products.length || 0;
+       
+        res.locals.cartTotal=CCart.products.length || 0;
     }
 
     next();

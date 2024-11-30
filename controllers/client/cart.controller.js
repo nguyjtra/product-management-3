@@ -5,8 +5,6 @@ module.exports.index=async(req,res)=>{
    let id=req.cookies.cartID
     console.log(id)
    const Cart=await cart.findOne({_id:id});
-
-  
     Cart.totalPrice=0;
    if(Cart.products.length>0){
     for(let item of Cart.products){
@@ -36,7 +34,6 @@ module.exports.add=async(req,res)=>{
     let cartID=req.cookies.cartID
     let id=req.params.id
     let quantity=parseInt(req.body.quantity);
-
 
     const Cart= await cart.findOne({
         _id:cartID

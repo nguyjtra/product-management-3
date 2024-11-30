@@ -15,8 +15,8 @@ module.exports.index=async(req,res)=>{
       const productInfo=await Product.findOne({
           _id: item.productid
       }).select('title thumbnail slug price discountPercentage ')
-      productInfo.priceNew = (1 - productInfo.discountPercentage/100) * productInfo.price;
-
+      const ans=(1 - Math.round(productInfo.discountPercentage/100)) * productInfo.price;
+      productInfo.priceNew = Math.round(ans)
       productInfo.totalPrice= productInfo.priceNew * item.quantity
 
       item.productInfo=productInfo
