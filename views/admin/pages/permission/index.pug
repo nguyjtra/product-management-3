@@ -1,20 +1,20 @@
 extends ../../layout/default.pug
 block main
-  h1(class="mb-4") Phân quyền
+  h1(class="mb-4") Permission
   if(records)
     div(class="text-right")
       button(
         type="submit"
         class="btn btn-primary mb-3"
         button-submit=`/${prefixAdmin}/permission/Update`
-      ) Cập nhật
+      ) Update
     table(
       class="table table-hover table-sm"
       table-permissions
     )
       thead
         tr
-          th Tính năng
+          th feature
           each item in records
             th(
               class="text-center"
@@ -24,9 +24,9 @@ block main
         //- Danh sách sản phẩm
         tr
           td(colspan="4")
-            b Danh sách sản phẩm
+            b Product List
         tr
-          td Xem
+          td watch
           each item in records
             td(class="text-center")
               input(
@@ -36,7 +36,7 @@ block main
                 checked=(item.permission.includes("products_view") ? true : false)
               )
         tr
-          td Thêm mới
+          td Add new
           each item in records
             td(class="text-center")
               input(
@@ -46,7 +46,7 @@ block main
                 checked=(item.permission.includes("products_create") ? true : false)
               )
         tr
-          td Chỉnh sửa
+          td Edit
           each item in records
             td(class="text-center")
               input(
@@ -56,7 +56,7 @@ block main
                 checked=(item.permission.includes("products_edit") ? true : false)
               )
         tr
-          td Xóa
+          td Delete
           each item in records
             td(class="text-center")
               input(
@@ -69,9 +69,9 @@ block main
         //- Danh mục sản phẩm
         tr
           td(colspan="4")
-            b Danh mục sản phẩm
+            b Product category
         tr
-          td Xem
+          td Watch
           each item in records
             td(class="text-center")
               input(
@@ -81,7 +81,7 @@ block main
                 checked=(item.permission.includes("products-category_view") ? true : false)
               )
         tr
-          td Thêm mới
+          td Add new
           each item in records
             td(class="text-center")
               input(
@@ -91,7 +91,7 @@ block main
                 checked=(item.permission.includes("products-category_create") ? true : false)
               )
         tr
-          td Chỉnh sửa
+          td Edit
           each item in records
             td(class="text-center")
               input(
@@ -101,7 +101,7 @@ block main
                 checked=(item.permission.includes("products-category_edit") ? true : false)
               )
         tr
-          td Xóa
+          td Delete
           each item in records
             td(class="text-center")
               input(
@@ -114,9 +114,9 @@ block main
         //- Nhóm quyền
         tr
           td(colspan="4")
-            b Nhóm quyền
+            b Permission
         tr
-          td Xem
+          td watch
           each item in records
             td(class="text-center")
               input(
@@ -126,7 +126,7 @@ block main
                 checked=(item.permission.includes("roles_view") ? true : false)
               )
         tr
-          td Thêm mới
+          td Add new
           each item in records
             td(class="text-center")
               input(
@@ -136,7 +136,7 @@ block main
                 checked=(item.permission.includes("roles_create") ? true : false)
               )
         tr
-          td Chỉnh sửa
+          td Edit
           each item in records
             td(class="text-center")
               input(
@@ -146,7 +146,7 @@ block main
                 checked=(item.permission.includes("roles_edit") ? true : false)
               )
         tr
-          td Xóa
+          td Delete
           each item in records
             td(class="text-center")
               input(
@@ -156,7 +156,7 @@ block main
                 checked=(item.permission.includes("roles_delete") ? true : false)
               )
         tr
-          td Phân quyền
+          td Roles
           each item in records
             td(class="text-center")
               input(
@@ -169,9 +169,9 @@ block main
         //- Tài khoản admin
         tr
           td(colspan="4")
-            b Tài khoản admin
+            b  Admin account
         tr
-          td Xem
+          td watch
           each item in records
             td(class="text-center")
               input(
@@ -181,7 +181,7 @@ block main
                 checked=(item.permission.includes("accounts_view") ? true : false)
               )
         tr
-          td Thêm mới
+          td Add new
           each item in records
             td(class="text-center")
               input(
@@ -191,7 +191,7 @@ block main
                 checked=(item.permission.includes("accounts_create") ? true : false)
               )
         tr
-          td Chỉnh sửa
+          td Edit
           each item in records
             td(class="text-center")
               input(
@@ -201,7 +201,7 @@ block main
                 checked=(item.permission.includes("accounts_edit") ? true : false)
               )
         tr
-          td Xóa
+          td Delete
           each item in records
             td(class="text-center")
               input(
